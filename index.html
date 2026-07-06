@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FINOS | Business Health Platform</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<div class="background"></div>
+
+<main class="container">
+
+    <!-- Logo -->
+
+    <img src="assets/finos-logo.png"
+         class="logo"
+         alt="FINOS">
+
+
+    <!-- Hero -->
+
+    <section class="hero">
+
+        <h1>
+            Know the financial health
+            <br>
+            of your business.
+        </h1>
+
+        <p>
+
+            Upload your financial statements and receive your
+            <strong>Business Health Report™</strong>
+            in under 60 seconds.
+
+        </p>
+
+    </section>
+
+<!-- ==========================================
+     Business Health Report™
+=========================================== -->
+
+<section id="reportScreen" class="report hidden">
+
+    <img src="assets/finos-logo.png" class="analysis-logo">
+
+    <h1>Business Health Report™</h1>
+
+    <p class="report-date">
+        Generated Today
+    </p>
+
+    <!-- FINOS SCORE -->
+
+    <div class="score-card">
+
+        <div class="score-ring">
+
+            <div class="score-value">
+
+                84
+
+            </div>
+
+        </div>
+
+        <h2>FINOS Score™</h2>
+
+        <p>
+
+            Excellent
+
+        </p>
+
+        <span>
+
+            Your business is financially healthy with several opportunities to improve profitability.
+
+        </span>
+
+    </div>
+
+
+    <!-- Financials -->
+
+    <div class="section-title">
+
+        FINOS Financials™
+
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <small>Revenue</small>
+            <strong>€1.24M</strong>
+        </div>
+
+        <div class="card">
+            <small>Gross Margin</small>
+            <strong>54%</strong>
+        </div>
+
+        <div class="card">
+            <small>EBITDA</small>
+            <strong>18%</strong>
+        </div>
+
+        <div class="card">
+            <small>Net Margin</small>
+            <strong>11%</strong>
+        </div>
+
+    </div>
+
+
+
+    <!-- Benchmark -->
+
+    <div class="section-title">
+
+        FINOS Benchmarks™
+
+    </div>
+
+    <div class="benchmark">
+
+        <h2>
+
+            Better than
+
+            <strong>82%</strong>
+
+            of similar businesses
+
+        </h2>
+
+    </div>
+
+
+
+    <!-- AI INSIGHTS -->
+
+    <div class="section-title">
+
+        FINOS AI Insights™
+
+    </div>
+
+    <div class="insight">
+
+        <h3>Opportunity 1</h3>
+
+        <p>
+
+            SG&A expenses have increased faster than revenue over the last twelve months.
+
+        </p>
+
+        <strong>
+
+            Estimated annual impact
+
+            €48,000
+
+        </strong>
+
+    </div>
+
+    <div class="insight">
+
+        <h3>Opportunity 2</h3>
+
+        <p>
+
+            Gross margin remains below comparable businesses.
+
+        </p>
+
+        <strong>
+
+            Estimated improvement
+
+            €72,000
+
+        </strong>
+
+    </div>
+
+
+
+    <!-- Analytics -->
+
+    <div class="section-title">
+
+        FINOS AI Analytics™
+
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+
+            <small>Profitability</small>
+
+            <strong>91</strong>
+
+        </div>
+
+        <div class="card">
+
+            <small>Liquidity</small>
+
+            <strong>87</strong>
+
+        </div>
+
+        <div class="card">
+
+            <small>Growth</small>
+
+            <strong>82</strong>
+
+        </div>
+
+        <div class="card">
+
+            <small>Efficiency</small>
+
+            <strong>76</strong>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- AI -->
+
+    <div class="section-title">
+
+        FINOS AI™
+
+    </div>
+
+    <div class="chat-box">
+
+        <input
+            placeholder="Ask FINOS anything...">
+
+        <button>
+
+            Ask
+
+        </button>
+
+    </div>
+
+</section>
+    <!-- Upload -->
+
+    <section class="upload-card">
+
+        <div class="upload-area" id="drop-zone">
+
+            <svg width="48"
+                 height="48"
+                 viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="1.5">
+
+                <path d="M12 16V4"></path>
+                <path d="M7 9L12 4L17 9"></path>
+                <path d="M4 20H20"></path>
+
+            </svg>
+
+            <h2>
+
+                Generate Business Health Report™
+
+            </h2>
+
+            <p>
+
+                Drag & Drop Financial Statements
+
+                <br><br>
+
+                or
+
+            </p>
+
+            <button id="browseButton">
+
+                Browse Files
+
+            </button>
+
+            <input
+                    type="file"
+                    id="fileInput"
+                    accept=".pdf,.csv,.xlsx,.xls"
+                    hidden>
+
+            <span>
+
+                PDF • XLSX • CSV
+
+            </span>
+
+        </div>
+
+    </section>
+
+
+    <!-- Included -->
+
+    <section class="features">
+
+        <h3>
+
+            Included in every report
+
+        </h3>
+
+        <div class="feature">
+
+            <strong>FINOS Score™</strong>
+
+            <span>Business Health Score</span>
+
+        </div>
+
+        <div class="feature">
+
+            <strong>FINOS Financials™</strong>
+
+            <span>Financial Snapshot</span>
+
+        </div>
+
+        <div class="feature">
+
+            <strong>FINOS Benchmarks™</strong>
+
+            <span>Industry Comparison</span>
+
+        </div>
+
+        <div class="feature">
+
+            <strong>FINOS AI Insights™</strong>
+
+            <span>Key Opportunities</span>
+
+        </div>
+
+        <div class="feature">
+
+            <strong>FINOS AI Analytics™</strong>
+
+            <span>Deep Financial Analysis</span>
+
+        </div>
+
+        <div class="feature">
+
+            <strong>FINOS AI™</strong>
+
+            <span>Ask Anything</span>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- Analysis Screen -->
+
+<section
+        id="analysisScreen"
+        class="analysis hidden">
+
+    <img src="assets/finos-logo.png"
+         class="analysis-logo">
+
+    <h2>
+
+        Analyzing your business...
+
+    </h2>
+
+    <div class="analysis-list">
+
+        <div class="analysis-item">
+            Reading Financial Statements
+        </div>
+
+        <div class="analysis-item">
+            Extracting Financial Data
+        </div>
+
+        <div class="analysis-item">
+            Calculating Financial Ratios
+        </div>
+
+        <div class="analysis-item">
+            Benchmarking
+        </div>
+
+        <div class="analysis-item">
+            Detecting Opportunities
+        </div>
+
+        <div class="analysis-item">
+            Building Business Health Report™
+        </div>
+
+    </div>
+
+</section>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
