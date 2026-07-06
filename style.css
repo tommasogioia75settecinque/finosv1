@@ -1,0 +1,414 @@
+/* ==========================================
+   FINOS v2
+   Business Health Platform
+========================================== */
+
+:root{
+
+    --bg:#050505;
+    --bg2:#0b0b0b;
+
+    --card:rgba(255,255,255,.045);
+
+    --border:rgba(255,255,255,.08);
+
+    --text:#F5F5F5;
+
+    --muted:#9A9A9A;
+
+    --white:#FFFFFF;
+
+    --radius:28px;
+
+    --shadow:
+        0 30px 80px rgba(0,0,0,.45);
+
+    --transition:.35s ease;
+
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+body{
+
+    font-family:'Inter',sans-serif;
+
+    background:linear-gradient(
+        180deg,
+        var(--bg),
+        var(--bg2)
+    );
+
+    color:var(--text);
+
+    min-height:100vh;
+
+    overflow-x:hidden;
+
+}
+
+/* background */
+
+.background{
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+
+    radial-gradient(
+        circle at top left,
+        rgba(255,255,255,.04),
+        transparent 35%
+    ),
+
+    radial-gradient(
+        circle at bottom right,
+        rgba(255,255,255,.03),
+        transparent 40%
+    );
+
+    z-index:-1;
+
+}
+
+/* container */
+
+.container{
+
+    width:min(680px,92%);
+
+    margin:auto;
+
+    padding:70px 0 100px;
+
+}
+
+/* logo */
+
+.logo{
+
+    width:210px;
+
+    display:block;
+
+    margin:0 auto 60px;
+
+}
+
+/* hero */
+
+.hero{
+
+    text-align:center;
+
+}
+
+.hero h1{
+
+    font-size:3.3rem;
+
+    font-weight:300;
+
+    line-height:1.05;
+
+    letter-spacing:-2px;
+
+    margin-bottom:22px;
+
+}
+
+.hero p{
+
+    color:var(--muted);
+
+    line-height:1.8;
+
+    font-size:18px;
+
+    max-width:560px;
+
+    margin:auto;
+
+}
+
+/* upload card */
+
+.upload-card{
+
+    margin-top:55px;
+
+}
+
+.upload-area{
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:var(--radius);
+
+    padding:60px 40px;
+
+    text-align:center;
+
+    backdrop-filter:blur(25px);
+
+    transition:var(--transition);
+
+    box-shadow:var(--shadow);
+
+}
+
+.upload-area:hover{
+
+    transform:translateY(-4px);
+
+    border-color:rgba(255,255,255,.16);
+
+}
+
+.upload-area svg{
+
+    margin-bottom:20px;
+
+}
+
+.upload-area h2{
+
+    font-weight:500;
+
+    font-size:1.7rem;
+
+    margin-bottom:18px;
+
+}
+
+.upload-area p{
+
+    color:var(--muted);
+
+    margin-bottom:30px;
+
+    line-height:1.8;
+
+}
+
+.upload-area span{
+
+    display:block;
+
+    margin-top:24px;
+
+    color:var(--muted);
+
+    font-size:14px;
+
+}
+
+/* button */
+
+button{
+
+    background:#fff;
+
+    color:#000;
+
+    border:none;
+
+    border-radius:18px;
+
+    padding:18px 34px;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:var(--transition);
+
+}
+
+button:hover{
+
+    transform:translateY(-2px);
+
+    opacity:.92;
+
+}
+
+/* features */
+
+.features{
+
+    margin-top:60px;
+
+}
+
+.features h3{
+
+    text-transform:uppercase;
+
+    letter-spacing:2px;
+
+    color:var(--muted);
+
+    font-size:13px;
+
+    margin-bottom:25px;
+
+}
+
+.feature{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:18px 0;
+
+    border-bottom:1px solid rgba(255,255,255,.05);
+
+}
+
+.feature strong{
+
+    font-weight:500;
+
+}
+
+.feature span{
+
+    color:var(--muted);
+
+}
+
+/* analysis screen */
+
+.analysis{
+
+    position:fixed;
+
+    inset:0;
+
+    background:#050505;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    transition:.5s;
+
+}
+
+.analysis.hidden{
+
+    display:none;
+
+}
+
+.analysis-logo{
+
+    width:180px;
+
+    margin-bottom:50px;
+
+}
+
+.analysis h2{
+
+    font-weight:300;
+
+    margin-bottom:45px;
+
+}
+
+.analysis-list{
+
+    width:420px;
+
+    max-width:90%;
+
+}
+
+.analysis-item{
+
+    padding:16px 0;
+
+    color:var(--muted);
+
+    border-bottom:1px solid rgba(255,255,255,.06);
+
+    opacity:.35;
+
+    transition:.4s;
+
+}
+
+.analysis-item.active{
+
+    opacity:1;
+
+    color:#fff;
+
+}
+
+/* responsive */
+
+@media(max-width:768px){
+
+.hero h1{
+
+font-size:2.4rem;
+
+}
+
+.hero p{
+
+font-size:16px;
+
+}
+
+.logo{
+
+width:180px;
+
+margin-bottom:45px;
+
+}
+
+.upload-area{
+
+padding:40px 24px;
+
+}
+
+.feature{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+gap:8px;
+
+}
+
+}
