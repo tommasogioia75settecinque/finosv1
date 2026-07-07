@@ -49,9 +49,94 @@
         </div>
 
         <form id="manualForm" class="manual-form">
-          <div class="form-row">
-            <label for="businessName">Business name</label>
-            <input id="businessName" type="text" placeholder="Example: FINOS Labs" />
+      <div class="form-row">
+  <label for="businessName">Business name</label>
+  <input id="businessName" type="text" placeholder="Example: FINOS Labs" />
+</div>
+
+<div class="form-grid">
+  <div class="form-row">
+    <label for="industry">Industry</label>
+    <input id="industry" type="text" placeholder="Restaurant, SaaS, Retail..." />
+  </div>
+
+  <div class="form-row">
+    <label for="country">Country</label>
+    <input id="country" type="text" placeholder="Italy" />
+  </div>
+
+  <div class="form-row">
+    <label for="financialYear">Financial year</label>
+    <input id="financialYear" type="text" placeholder="2025" />
+  </div>
+
+  <div class="form-row">
+    <label for="revenue">Revenue</label>
+    <input id="revenue" type="number" min="0" step="any" placeholder="1200000" required />
+  </div>
+
+  <div class="form-row">
+    <label for="cogs">COGS / Cost of Revenue</label>
+    <input id="cogs" type="number" min="0" step="any" placeholder="520000" required />
+  </div>
+
+  <div class="form-row">
+    <label for="payroll">Payroll</label>
+    <input id="payroll" type="number" min="0" step="any" placeholder="240000" required />
+  </div>
+
+  <div class="form-row">
+    <label for="rent">Rent</label>
+    <input id="rent" type="number" min="0" step="any" placeholder="90000" required />
+  </div>
+
+  <div class="form-row">
+    <label for="marketing">Marketing</label>
+    <input id="marketing" type="number" min="0" step="any" placeholder="45000" required />
+  </div>
+
+  <div class="form-row">
+    <label for="otherExpenses">Other operating expenses</label>
+    <input id="otherExpenses" type="number" min="0" step="any" placeholder="85000" required />
+  </div>
+
+  <div class="form-row">
+    <label for="interest">Interest expense</label>
+    <input id="interest" type="number" min="0" step="any" placeholder="15000" required />
+  </div>
+
+  <div class="form-row">
+    <label for="taxes">Taxes</label>
+    <input id="taxes" type="number" min="0" step="any" placeholder="30000" required />
+  </div>
+
+  <div class="form-row">
+    <label for="cash">Cash</label>
+    <input id="cash" type="number" min="0" step="any" placeholder="180000" required />
+  </div>
+
+  <div class="form-row">
+    <label for="inventory">Inventory</label>
+    <input id="inventory" type="number" min="0" step="any" placeholder="60000" required />
+  </div>
+
+  <div class="form-row">
+    <label for="accountsReceivable">Accounts receivable</label>
+    <input id="accountsReceivable" type="number" min="0" step="any" placeholder="95000" required />
+  </div>
+
+  <div class="form-row">
+    <label for="accountsPayable">Accounts payable</label>
+    <input id="accountsPayable" type="number" min="0" step="any" placeholder="70000" required />
+  </div>
+
+  <div class="form-row">
+    <label for="debt">Debt</label>
+    <input id="debt" type="number" min="0" step="any" placeholder="220000" required />
+  </div>
+</div>
+
+<button type="submit" class="primary-button full-width">Run FINOS</button>
           </div>
 
           <div class="form-grid">
