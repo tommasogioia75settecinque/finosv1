@@ -4,9 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FINOS | Business Health Platform</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
   <link rel="stylesheet" href="styles.css" />
 </head>
 
@@ -16,6 +18,7 @@
 
   <main id="app" class="app-shell">
 
+    <!-- START SCREEN -->
     <section id="startScreen" class="screen start-screen">
       <header class="brand-header">
         <img src="assets/finos-logo.png" alt="FINOS" class="brand-logo" />
@@ -24,14 +27,22 @@
 
       <section class="hero-card glass-card">
         <div class="eyebrow">FINOS Financials™</div>
+
         <h1>Know the health of your business.</h1>
+
         <p class="hero-copy">
-          Enter your financials manually or upload a file preview. FINOS calculates financial health, benchmarks performance, and identifies improvement opportunities.
+          Enter your financials manually or upload a file preview. FINOS calculates business health,
+          financial performance, benchmarks, and improvement opportunities.
         </p>
 
         <div class="action-grid">
-          <button id="manualTrigger" class="primary-button" type="button">Start manual analysis</button>
-          <button id="uploadTrigger" class="secondary-button" type="button">Upload file preview</button>
+          <button id="manualTrigger" class="primary-button" type="button">
+            Start manual analysis
+          </button>
+
+          <button id="uploadTrigger" class="secondary-button" type="button">
+            Upload file preview
+          </button>
         </div>
 
         <input id="fileInput" type="file" accept=".pdf,.csv,.xlsx,.xls" hidden />
@@ -43,11 +54,14 @@
         </div>
       </section>
 
+      <!-- MANUAL INPUT -->
       <section id="manualPanel" class="manual-panel glass-card hidden">
         <div class="section-heading">
           <span>Manual Input</span>
           <h2>Input core financials</h2>
-          <p>Use approximate numbers if needed. FINOS will calculate the first version of your financial health report.</p>
+          <p>
+            Use approximate numbers if needed. FINOS will calculate your first business health dashboard.
+          </p>
         </div>
 
         <form id="manualForm" class="manual-form">
@@ -138,23 +152,54 @@
             </div>
           </div>
 
-          <button type="submit" class="primary-button full-width">Run FINOS Analysis</button>
+          <button type="submit" class="primary-button full-width">
+            Run FINOS Analysis
+          </button>
         </form>
       </section>
 
       <section class="included-grid">
-        <article class="included-item"><strong>FINOS Financials™</strong><span>Core financial snapshot</span></article>
-        <article class="included-item"><strong>FINOS Score™</strong><span>Business health score</span></article>
-        <article class="included-item"><strong>FINOS Benchmarks™</strong><span>Industry comparison</span></article>
-        <article class="included-item"><strong>FINOS Leaders™</strong><span>Relative score leaderboard</span></article>
-        <article class="included-item"><strong>FINOS AI Insights™</strong><span>Actionable opportunities</span></article>
-        <article class="included-item"><strong>FINOS AI Analytics™</strong><span>Financial health drivers</span></article>
-        <article class="included-item"><strong>FINOS AI™</strong><span>Ask questions about your report</span></article>
+        <article class="included-item">
+          <strong>FINOS Financials™</strong>
+          <span>Core financial snapshot</span>
+        </article>
+
+        <article class="included-item">
+          <strong>FINOS Score™</strong>
+          <span>Business health score</span>
+        </article>
+
+        <article class="included-item">
+          <strong>FINOS Benchmarks™</strong>
+          <span>Industry comparison</span>
+        </article>
+
+        <article class="included-item">
+          <strong>FINOS Leaders™</strong>
+          <span>Relative score leaderboard</span>
+        </article>
+
+        <article class="included-item">
+          <strong>FINOS AI Insights™</strong>
+          <span>Actionable opportunities</span>
+        </article>
+
+        <article class="included-item">
+          <strong>FINOS AI Analytics™</strong>
+          <span>Financial health drivers</span>
+        </article>
+
+        <article class="included-item">
+          <strong>FINOS AI™</strong>
+          <span>Ask questions about your business</span>
+        </article>
       </section>
     </section>
 
+    <!-- ANALYSIS SCREEN -->
     <section id="analysisScreen" class="screen analysis-screen hidden">
       <img src="assets/finos-logo.png" alt="FINOS" class="analysis-logo" />
+
       <h2>Running FINOS...</h2>
       <p id="analysisSubtitle">Analyzing your financial data.</p>
 
@@ -164,111 +209,139 @@
         <div class="analysis-item">Calculating financial ratios</div>
         <div class="analysis-item">Generating FINOS Score</div>
         <div class="analysis-item">Benchmarking performance</div>
-        <div class="analysis-item">Building Business Health Report™</div>
+        <div class="analysis-item">Building Business Health Dashboard™</div>
       </div>
     </section>
 
+    <!-- BUSINESS HEALTH DASHBOARD -->
     <section id="reportScreen" class="screen report-screen hidden">
       <header class="report-header">
         <img src="assets/finos-logo.png" alt="FINOS" class="report-logo" />
-        <span>Business Health Report™</span>
+        <span>Business Health Dashboard™</span>
       </header>
 
+      <!-- MAIN HEALTH SCORE -->
       <section class="score-card glass-card">
         <div id="scoreRing" class="score-ring">
           <div>
             <span id="scoreValue">84</span>
-            <small>FINOS Score™</small>
+            <small>Business Health</small>
           </div>
         </div>
-        <h1 id="scoreLabel">Excellent</h1>
 
-<div class="health-summary">
-  <div class="health-item">
-    <span>Business Status</span>
-    <strong id="businessStatus">Healthy</strong>
-  </div>
+        <h1 id="scoreLabel">Business Health: Healthy</h1>
 
-  <div class="health-item">
-    <span>Grade</span>
-    <strong id="businessGrade">A</strong>
-  </div>
+        <div class="health-summary">
+          <div class="health-item">
+            <span>Business Status</span>
+            <strong id="businessStatus">Healthy</strong>
+          </div>
 
-  <div class="health-item">
-    <span>Next Goal</span>
-    <strong id="nextGoal">90</strong>
-  </div>
-</div>
+          <div class="health-item">
+            <span>Business Momentum</span>
+            <strong id="businessMomentum">Stable</strong>
+          </div>
 
-<p id="scoreNarrative">Your business is financially healthy with opportunities to improve profitability and cash flow.</p>
+          <div class="health-item">
+            <span>Next Goal</span>
+            <strong id="nextGoal">90</strong>
+          </div>
+        </div>
 
+        <p id="scoreNarrative">
+          Your business is financially healthy with opportunities to improve profitability and cash flow.
+        </p>
+      </section>
+
+      <!-- SCORE DRIVERS -->
       <section class="report-section">
-  <div class="section-heading">
-    <span>FINOS Score™</span>
-    <h2>Why this score?</h2>
-    <p>The FINOS Score is calculated from profitability, liquidity, efficiency, stability, and growth.</p>
-  </div>
-  
-</section>
+        <div class="section-heading">
+          <span>FINOS Score™</span>
+          <h2>Why this score?</h2>
+          <p>
+            Business Health is calculated from profitability, liquidity, efficiency, stability, and growth.
+          </p>
+        </div>
 
+        <div id="scoreDrivers" class="score-drivers"></div>
+      </section>
+
+      <!-- FINANCIALS -->
       <section class="report-section">
         <div class="section-heading">
           <span>FINOS Financials™</span>
           <h2>Financial Snapshot</h2>
         </div>
+
         <div id="financialCards" class="metric-grid"></div>
       </section>
 
+      <!-- BENCHMARKS -->
       <section class="report-section glass-card benchmark-card">
         <div class="section-heading compact">
           <span>FINOS Benchmarks™</span>
-          <h2>You outperform <strong id="benchmarkPercent">78%</strong> of similar businesses.</h2>
+          <h2>
+            You outperform <strong id="benchmarkPercent">78%</strong> of similar businesses.
+          </h2>
         </div>
+
         <div id="benchmarkRows" class="benchmark-rows"></div>
       </section>
 
+      <!-- LEADERS -->
       <section class="report-section glass-card leaders-card">
         <div class="section-heading compact">
           <span>FINOS Leaders™</span>
           <h2>Live leaderboard based on relative FINOS Score™ only.</h2>
           <p>No revenue, profit, costs, or private financial data is shown.</p>
         </div>
+
         <div id="leadersList" class="leaders-list"></div>
       </section>
 
+      <!-- INSIGHTS -->
       <section class="report-section">
         <div class="section-heading">
           <span>FINOS AI Insights™</span>
           <h2>Highest-impact opportunities</h2>
         </div>
+
         <div id="insightsList" class="insights-list"></div>
       </section>
 
+      <!-- ANALYTICS -->
       <section class="report-section">
         <div class="section-heading">
           <span>FINOS AI Analytics™</span>
           <h2>Financial health drivers</h2>
         </div>
+
         <div id="analyticsBars" class="analytics-bars"></div>
       </section>
 
+      <!-- AI CHAT -->
       <section class="report-section glass-card ai-card">
         <div class="section-heading compact">
           <span>FINOS AI™</span>
           <h2>Ask FINOS anything</h2>
         </div>
+
         <div class="chat-input">
           <input id="aiQuestion" type="text" placeholder="Why is my score not higher?" />
           <button id="askButton" type="button">Ask</button>
         </div>
-        <p id="aiAnswer" class="ai-answer">Ask a question about this report.</p>
+
+        <p id="aiAnswer" class="ai-answer">
+          Ask a question about this business health dashboard.
+        </p>
       </section>
 
       <div class="report-actions">
-        <button id="runAgain" class="secondary-button" type="button">Run FINOS again</button>
+        <button id="runAgain" class="secondary-button" type="button">
+          Run FINOS again
+        </button>
       </div>
     </section>
-
   </main>
 
   <script src="script.js"></script>

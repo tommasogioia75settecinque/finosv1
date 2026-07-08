@@ -43,6 +43,7 @@ uploadTrigger.addEventListener('click', () => fileInput.click());
 
 manualTrigger.addEventListener('click', () => {
   manualPanel.classList.toggle('hidden');
+
   if (!manualPanel.classList.contains('hidden')) {
     manualPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
@@ -145,9 +146,16 @@ function validateInput(input) {
     return false;
   }
 
-  const totalCost = input.cogs + input.payroll + input.rent + input.marketing + input.otherExpenses + input.interest + input.taxes;
+  const totalCosts =
+    input.cogs +
+    input.payroll +
+    input.rent +
+    input.marketing +
+    input.otherExpenses +
+    input.interest +
+    input.taxes;
 
-  if (totalCost > input.revenue * 3) {
+  if (totalCosts > input.revenue * 3) {
     alert('Please check your costs. They look unusually high compared with revenue.');
     return false;
   }
@@ -160,9 +168,12 @@ function runFinos(input, subtitle) {
   reportScreen.classList.add('hidden');
   analysisScreen.classList.remove('hidden');
 
-  document.getElementById('analysisSubtitle').textContent = subtitle || 'Analyzing your financial data.';
+  document.getElementById('analysisSubtitle').textContent =
+    subtitle || 'Analyzing your financial data.';
 
-  analysisItems.forEach((item) => item.classList.remove('active', 'done'));
+  analysisItems.forEach((item) => {
+    item.classList.remove('active', 'done');
+  });
 
   let index = 0;
 
@@ -340,10 +351,12 @@ function calculateFinosScore(financials) {
   );
 
   const label =
-    value >= 85 ? 'Excellent' :
-    value >= 72 ? 'Healthy' :
-    value >= 58 ? 'Watchlist' :
-    'Needs Attention';
+    value >= 90 ? 'Elite' :
+    value >= 80 ? 'Excellent' :
+    value >= 70 ? 'Healthy' :
+    value >= 60 ? 'Improving' :
+    value >= 50 ? 'At Risk' :
+    'Critical';
 
   return {
     value,
@@ -368,33 +381,31 @@ function calculateBenchmarks(financials, score) {
         label: 'Gross Margin',
         actual: financials.grossMargin,
         benchmark: 55,
-        unit: '%'
+        lowerIsBetter: false
       },
       {
         label: 'Net Margin',
         actual: financials.netMargin,
         benchmark: 12,
-        unit: '%'
+        lowerIsBetter: false
       },
       {
         label: 'Payroll Ratio',
         actual: financials.payrollRatio,
         benchmark: 28,
-        unit: '%',
         lowerIsBetter: true
       },
       {
         label: 'Cost Ratio',
         actual: financials.costRatio,
         benchmark: 82,
-        unit: '%',
         lowerIsBetter: true
       }
     ]
   };
 }
 
-function generateInsights(financials, benchmarks) {
+function generateInsights(financials) {
   const grossMarginGap = Math.max(0, 55 - financials.grossMargin);
   const payrollGap = Math.max(0, financials.payrollRatio - 28);
   const rentGap = Math.max(0, financials.rentRatio - 10);
@@ -452,56 +463,51 @@ function renderReport(analysis) {
   renderAnalytics(analysis);
 }
 
-function renderScoreDrivers(analysis) {
-  let container = document.getElementById('scoreDrivers');
+function renderScore(analysis) {
+  const score = analysis.score.value;
+  const scoreDegrees = Math.round((score / 100) * 360);
 
-  if (!container) {
-    const financialSection = document.getElementById('financialCards')?.closest('.report-section');
+  let status = 'Critical';
+  let momentum = 'Needs Attention';
 
-    const section = document.createElement('section');
-    section.className = 'report-section';
-    section.innerHTML = `
-      <div class="section-heading">
-        <span>FINOS Score™</span>
-        <h2>Why this score?</h2>
-        <p>The FINOS Score is calculated from profitability, liquidity, efficiency, stability, and growth.</p>
-      </div>
-      <div id="scoreDrivers" class="score-drivers"></div>
-    `;
-
-    financialSection.parentNode.insertBefore(section, financialSection);
-    container = document.getElementById('scoreDrivers');
-    const score = analysis.score.value;
-
-let grade = "F";
-let status = "Critical";
-
-if(score >= 90){
-    grade = "A+";
-    status = "Elite";
-}
-else if(score >= 80){
-    grade = "A";
-    status = "Excellent";
-}
-else if(score >= 70){
-    grade = "B";
-    status = "Healthy";
-}
-else if(score >= 60){
-    grade = "C";
-    status = "Improving";
-}
-else if(score >= 50){
-    grade = "D";
-    status = "At Risk";
-}
-
-document.getElementById("businessGrade").textContent = grade;
-document.getElementById("businessStatus").textContent = status;
-document.getElementById("nextGoal").textContent =
-score >= 90 ? "Maintain" : "90";
+  if (score >= 90) {
+    status = 'Elite';
+    momentum = 'Strong';
+  } else if (score >= 80) {
+    status = 'Excellent';
+    momentum = 'Improving';
+  } else if (score >= 70) {
+    status = 'Healthy';
+    momentum = 'Stable';
+  } else if (score >= 60) {
+    status = 'Improving';
+    momentum = 'Watch';
+  } else if (score >= 50) {
+    status = 'At Risk';
+    momentum = 'Weak';
   }
+
+  document.getElementById('scoreRing').style.background =
+    `conic-gradient(#fff 0deg, #8e8e8e ${scoreDegrees}deg, rgba(255,255,255,.08) ${scoreDegrees}deg)`;
+
+  document.getElementById('scoreValue').textContent = score;
+  document.getElementById('scoreLabel').textContent = `Business Health: ${status}`;
+
+  const businessStatus = document.getElementById('businessStatus');
+  const businessMomentum = document.getElementById('businessMomentum');
+  const nextGoal = document.getElementById('nextGoal');
+
+  if (businessStatus) businessStatus.textContent = status;
+  if (businessMomentum) businessMomentum.textContent = momentum;
+  if (nextGoal) nextGoal.textContent = score >= 90 ? 'Maintain' : '90';
+
+  document.getElementById('scoreNarrative').textContent = narrative(analysis);
+  document.getElementById('benchmarkPercent').textContent = `${analysis.benchmarks.benchmarkPercent}%`;
+}
+
+function renderScoreDrivers(analysis) {
+  const container = document.getElementById('scoreDrivers');
+  if (!container) return;
 
   const drivers = [
     ['Profitability', analysis.score.drivers.profitability, 'Margins and profit strength'],
@@ -543,42 +549,6 @@ score >= 90 ? "Maintain" : "90";
       `).join('')}
     </div>
   `;
-}
-
-function renderScore(analysis) {
-  const score = analysis.score.value;
-  const scoreDegrees = Math.round((score / 100) * 360);
-
-  let grade = 'F';
-  let status = 'Critical';
-
-  if (score >= 90) {
-    grade = 'A+';
-    status = 'Elite';
-  } else if (score >= 80) {
-    grade = 'A';
-    status = 'Excellent';
-  } else if (score >= 70) {
-    grade = 'B';
-    status = 'Healthy';
-  } else if (score >= 60) {
-    grade = 'C';
-    status = 'Improving';
-  } else if (score >= 50) {
-    grade = 'D';
-    status = 'At Risk';
-  }
-
-  document.getElementById('scoreRing').style.background =
-    `conic-gradient(#fff 0deg, #8e8e8e ${scoreDegrees}deg, rgba(255,255,255,.08) ${scoreDegrees}deg)`;
-
-  document.getElementById('scoreValue').textContent = score;
-  document.getElementById('scoreLabel').textContent = `Business Health: ${status}`;
-  document.getElementById('businessStatus').textContent = status;
-  document.getElementById('businessGrade').textContent = grade;
-  document.getElementById('nextGoal').textContent = score >= 90 ? 'Maintain' : '90';
-  document.getElementById('scoreNarrative').textContent = narrative(analysis);
-  document.getElementById('benchmarkPercent').textContent = `${analysis.benchmarks.benchmarkPercent}%`;
 }
 
 function renderFinancialCards(analysis) {
@@ -689,7 +659,7 @@ function answerQuestion() {
 
   if (question.includes('score')) {
     answer.textContent =
-      `Your FINOS Score is ${score}/100. It is mainly driven by profitability, liquidity, efficiency, stability, and growth. The fastest improvement area is shown in AI Insights.`;
+      `Your Business Health score is ${score}/100. It is mainly driven by profitability, liquidity, efficiency, stability, and growth. The fastest improvement area is shown in AI Insights.`;
   } else if (question.includes('cash')) {
     answer.textContent =
       `Your cash position is ${money(f.cash)}, with an estimated ${f.cashRunwayMonths.toFixed(1)} months of runway. Improving collections and working capital can strengthen liquidity.`;
@@ -708,19 +678,27 @@ function answerQuestion() {
 function narrative(analysis) {
   const score = analysis.score.value;
 
-  if (score >= 85) {
-    return 'Your business is financially strong. The main opportunity is to protect margins while scaling efficiently.';
+  if (score >= 90) {
+    return 'Your business health is elite. The main priority is to protect performance while scaling carefully.';
   }
 
-  if (score >= 72) {
+  if (score >= 80) {
+    return 'Your business is financially strong. The main opportunity is to protect margins while improving liquidity and efficiency.';
+  }
+
+  if (score >= 70) {
     return 'Your business is healthy, but there are clear opportunities to improve profitability, efficiency, or cash flow.';
   }
 
-  if (score >= 58) {
-    return 'Your business has meaningful financial pressure. Focus on the largest margin, cost, or liquidity gap first.';
+  if (score >= 60) {
+    return 'Your business is improving, but it still has meaningful pressure in one or more financial health drivers.';
   }
 
-  return 'Your business needs attention. FINOS detected several financial weaknesses that may be suppressing cash flow and enterprise value.';
+  if (score >= 50) {
+    return 'Your business is at risk. FINOS detected financial weaknesses that may be suppressing cash flow and resilience.';
+  }
+
+  return 'Your business needs urgent attention. FINOS detected several weaknesses across profitability, liquidity, efficiency, or stability.';
 }
 
 function ratio(a, b) {
