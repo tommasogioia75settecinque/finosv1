@@ -9,11 +9,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
   <div class="background-orb orb-one"></div>
   <div class="background-orb orb-two"></div>
 
   <main id="app" class="app-shell">
+
     <section id="startScreen" class="screen start-screen">
       <header class="brand-header">
         <img src="assets/finos-logo.png" alt="FINOS" class="brand-logo" />
@@ -24,12 +26,12 @@
         <div class="eyebrow">FINOS Financials™</div>
         <h1>Know the health of your business.</h1>
         <p class="hero-copy">
-          Upload your financial statements or input financials manually. FINOS calculates your score, benchmarks performance, and surfaces the highest-impact financial opportunities.
+          Enter your financials manually or upload a file preview. FINOS calculates financial health, benchmarks performance, and identifies improvement opportunities.
         </p>
 
         <div class="action-grid">
-          <button id="uploadTrigger" class="primary-button">Run FINOS</button>
-          <button id="manualTrigger" class="secondary-button">Or input manually</button>
+          <button id="manualTrigger" class="primary-button" type="button">Start manual analysis</button>
+          <button id="uploadTrigger" class="secondary-button" type="button">Upload file preview</button>
         </div>
 
         <input id="fileInput" type="file" accept=".pdf,.csv,.xlsx,.xls" hidden />
@@ -37,7 +39,7 @@
         <div id="dropZone" class="drop-zone" aria-label="Upload financial statements">
           <div class="drop-icon">↑</div>
           <strong>Drop financial statements</strong>
-          <span>PDF • XLSX • CSV</span>
+          <span>PDF • XLSX • CSV preview</span>
         </div>
       </section>
 
@@ -45,147 +47,109 @@
         <div class="section-heading">
           <span>Manual Input</span>
           <h2>Input core financials</h2>
-          <p>Use approximate numbers if needed. The first version is built to test the FINOS report experience.</p>
+          <p>Use approximate numbers if needed. FINOS will calculate the first version of your financial health report.</p>
         </div>
 
         <form id="manualForm" class="manual-form">
-      <div class="form-row">
-  <label for="businessName">Business name</label>
-  <input id="businessName" type="text" placeholder="Example: FINOS Labs" />
-</div>
-
-<div class="form-grid">
-  <div class="form-row">
-    <label for="industry">Industry</label>
-    <input id="industry" type="text" placeholder="Restaurant, SaaS, Retail..." />
-  </div>
-
-  <div class="form-row">
-    <label for="country">Country</label>
-    <input id="country" type="text" placeholder="Italy" />
-  </div>
-
-  <div class="form-row">
-    <label for="financialYear">Financial year</label>
-    <input id="financialYear" type="text" placeholder="2025" />
-  </div>
-
-  <div class="form-row">
-    <label for="revenue">Revenue</label>
-    <input id="revenue" type="number" min="0" step="any" placeholder="1200000" required />
-  </div>
-
-  <div class="form-row">
-    <label for="cogs">COGS / Cost of Revenue</label>
-    <input id="cogs" type="number" min="0" step="any" placeholder="520000" required />
-  </div>
-
-  <div class="form-row">
-    <label for="payroll">Payroll</label>
-    <input id="payroll" type="number" min="0" step="any" placeholder="240000" required />
-  </div>
-
-  <div class="form-row">
-    <label for="rent">Rent</label>
-    <input id="rent" type="number" min="0" step="any" placeholder="90000" required />
-  </div>
-
-  <div class="form-row">
-    <label for="marketing">Marketing</label>
-    <input id="marketing" type="number" min="0" step="any" placeholder="45000" required />
-  </div>
-
-  <div class="form-row">
-    <label for="otherExpenses">Other operating expenses</label>
-    <input id="otherExpenses" type="number" min="0" step="any" placeholder="85000" required />
-  </div>
-
-  <div class="form-row">
-    <label for="interest">Interest expense</label>
-    <input id="interest" type="number" min="0" step="any" placeholder="15000" required />
-  </div>
-
-  <div class="form-row">
-    <label for="taxes">Taxes</label>
-    <input id="taxes" type="number" min="0" step="any" placeholder="30000" required />
-  </div>
-
-  <div class="form-row">
-    <label for="cash">Cash</label>
-    <input id="cash" type="number" min="0" step="any" placeholder="180000" required />
-  </div>
-
-  <div class="form-row">
-    <label for="inventory">Inventory</label>
-    <input id="inventory" type="number" min="0" step="any" placeholder="60000" required />
-  </div>
-
-  <div class="form-row">
-    <label for="accountsReceivable">Accounts receivable</label>
-    <input id="accountsReceivable" type="number" min="0" step="any" placeholder="95000" required />
-  </div>
-
-  <div class="form-row">
-    <label for="accountsPayable">Accounts payable</label>
-    <input id="accountsPayable" type="number" min="0" step="any" placeholder="70000" required />
-  </div>
-
-  <div class="form-row">
-    <label for="debt">Debt</label>
-    <input id="debt" type="number" min="0" step="any" placeholder="220000" required />
-  </div>
-</div>
-
-<button type="submit" class="primary-button full-width">Run FINOS</button>
+          <div class="form-row">
+            <label for="businessName">Business name</label>
+            <input id="businessName" type="text" placeholder="Example: FINOS Labs" />
           </div>
 
           <div class="form-grid">
             <div class="form-row">
+              <label for="industry">Industry</label>
+              <input id="industry" type="text" placeholder="Restaurant, SaaS, Retail..." />
+            </div>
+
+            <div class="form-row">
+              <label for="country">Country</label>
+              <input id="country" type="text" placeholder="Italy" />
+            </div>
+
+            <div class="form-row">
+              <label for="financialYear">Financial year</label>
+              <input id="financialYear" type="text" placeholder="2025" />
+            </div>
+
+            <div class="form-row">
               <label for="revenue">Revenue</label>
               <input id="revenue" type="number" min="0" step="any" placeholder="1200000" required />
             </div>
+
             <div class="form-row">
-              <label for="cogs">Cost of Revenue / COGS</label>
+              <label for="cogs">COGS / Cost of Revenue</label>
               <input id="cogs" type="number" min="0" step="any" placeholder="520000" required />
             </div>
+
             <div class="form-row">
-              <label for="sga">SG&A</label>
-              <input id="sga" type="number" min="0" step="any" placeholder="260000" required />
+              <label for="payroll">Payroll</label>
+              <input id="payroll" type="number" min="0" step="any" placeholder="240000" required />
             </div>
+
             <div class="form-row">
-              <label for="ebitda">EBITDA</label>
-              <input id="ebitda" type="number" step="any" placeholder="210000" required />
+              <label for="rent">Rent</label>
+              <input id="rent" type="number" min="0" step="any" placeholder="90000" required />
             </div>
+
             <div class="form-row">
-              <label for="netIncome">Net Income</label>
-              <input id="netIncome" type="number" step="any" placeholder="125000" required />
+              <label for="marketing">Marketing</label>
+              <input id="marketing" type="number" min="0" step="any" placeholder="45000" required />
             </div>
+
             <div class="form-row">
-              <label for="cash">Cash Position</label>
+              <label for="otherExpenses">Other operating expenses</label>
+              <input id="otherExpenses" type="number" min="0" step="any" placeholder="85000" required />
+            </div>
+
+            <div class="form-row">
+              <label for="interest">Interest expense</label>
+              <input id="interest" type="number" min="0" step="any" placeholder="15000" required />
+            </div>
+
+            <div class="form-row">
+              <label for="taxes">Taxes</label>
+              <input id="taxes" type="number" min="0" step="any" placeholder="30000" required />
+            </div>
+
+            <div class="form-row">
+              <label for="cash">Cash</label>
               <input id="cash" type="number" min="0" step="any" placeholder="180000" required />
             </div>
+
             <div class="form-row">
-              <label for="workingCapital">Working Capital</label>
-              <input id="workingCapital" type="number" step="any" placeholder="95000" required />
+              <label for="inventory">Inventory</label>
+              <input id="inventory" type="number" min="0" step="any" placeholder="60000" required />
             </div>
+
             <div class="form-row">
-              <label for="growth">Revenue Growth %</label>
-              <input id="growth" type="number" step="any" placeholder="12" required />
+              <label for="accountsReceivable">Accounts receivable</label>
+              <input id="accountsReceivable" type="number" min="0" step="any" placeholder="95000" required />
+            </div>
+
+            <div class="form-row">
+              <label for="accountsPayable">Accounts payable</label>
+              <input id="accountsPayable" type="number" min="0" step="any" placeholder="70000" required />
+            </div>
+
+            <div class="form-row">
+              <label for="debt">Debt</label>
+              <input id="debt" type="number" min="0" step="any" placeholder="220000" required />
             </div>
           </div>
 
-          <button type="submit" class="primary-button full-width">Run FINOS</button>
+          <button type="submit" class="primary-button full-width">Run FINOS Analysis</button>
         </form>
       </section>
 
       <section class="included-grid">
+        <article class="included-item"><strong>FINOS Financials™</strong><span>Core financial snapshot</span></article>
         <article class="included-item"><strong>FINOS Score™</strong><span>Business health score</span></article>
-        <article class="included-item"><strong>FINOS Financials™</strong><span>Financial snapshot</span></article>
         <article class="included-item"><strong>FINOS Benchmarks™</strong><span>Industry comparison</span></article>
-        <article class="included-item"><strong>FINOS AI Insights™</strong><span>Key opportunities</span></article>
-        <article class="included-item"><strong>FINOS AI Analytics™</strong><span>Deep financial analysis</span></article>
-        <article class="included-item"><strong>FINOS Leaders™</strong><span>Live score leaderboard</span></article>
-        <article class="included-item"><strong>FINOS AI™</strong><span>Ask anything</span></article>
+        <article class="included-item"><strong>FINOS Leaders™</strong><span>Relative score leaderboard</span></article>
+        <article class="included-item"><strong>FINOS AI Insights™</strong><span>Actionable opportunities</span></article>
+        <article class="included-item"><strong>FINOS AI Analytics™</strong><span>Financial health drivers</span></article>
+        <article class="included-item"><strong>FINOS AI™</strong><span>Ask questions about your report</span></article>
       </section>
     </section>
 
@@ -195,11 +159,11 @@
       <p id="analysisSubtitle">Analyzing your financial data.</p>
 
       <div class="analysis-list">
-        <div class="analysis-item">Reading financial statements</div>
+        <div class="analysis-item">Reading financial inputs</div>
         <div class="analysis-item">Normalizing income statement</div>
         <div class="analysis-item">Calculating financial ratios</div>
+        <div class="analysis-item">Generating FINOS Score</div>
         <div class="analysis-item">Benchmarking performance</div>
-        <div class="analysis-item">Detecting profit leaks</div>
         <div class="analysis-item">Building Business Health Report™</div>
       </div>
     </section>
@@ -218,7 +182,7 @@
           </div>
         </div>
         <h1 id="scoreLabel">Excellent</h1>
-        <p id="scoreNarrative">Your business is financially healthy with several opportunities to improve profitability and cash flow.</p>
+        <p id="scoreNarrative">Your business is financially healthy with opportunities to improve profitability and cash flow.</p>
       </section>
 
       <section class="report-section">
@@ -240,8 +204,8 @@
       <section class="report-section glass-card leaders-card">
         <div class="section-heading compact">
           <span>FINOS Leaders™</span>
-          <h2>Live leaderboard based on FINOS Score™ and performance.</h2>
-          <p>Compare this report with other benchmark participants. Demo data is anonymized until real accounts are live.</p>
+          <h2>Live leaderboard based on relative FINOS Score™ only.</h2>
+          <p>No revenue, profit, costs, or private financial data is shown.</p>
         </div>
         <div id="leadersList" class="leaders-list"></div>
       </section>
@@ -269,15 +233,16 @@
         </div>
         <div class="chat-input">
           <input id="aiQuestion" type="text" placeholder="Why is my score not higher?" />
-          <button id="askButton">Ask</button>
+          <button id="askButton" type="button">Ask</button>
         </div>
         <p id="aiAnswer" class="ai-answer">Ask a question about this report.</p>
       </section>
 
       <div class="report-actions">
-        <button id="runAgain" class="secondary-button">Run FINOS again</button>
+        <button id="runAgain" class="secondary-button" type="button">Run FINOS again</button>
       </div>
     </section>
+
   </main>
 
   <script src="script.js"></script>
