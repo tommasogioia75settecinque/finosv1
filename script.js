@@ -729,3 +729,71 @@ function escapeHtml(value) {
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;');
 }
+const floatingAiButton = document.getElementById('floatingAiButton');
+const floatingAiPanel = document.getElementById('floatingAiPanel');
+const closeFloatingAi = document.getElementById('closeFloatingAi');
+const floatingAiAsk = document.getElementById('floatingAiAsk');
+const floatingAiQuestion = document.getElementById('floatingAiQuestion');
+const floatingAiMessages = document.getElementById('floatingAiMessages');
+
+floatingAiButton.addEventListener('click', () => {
+  floatingAiPanel.classList.toggle('hidden');
+});
+
+closeFloatingAi.addEventListener('click', () => {
+  floatingAiPanel.classList.add('hidden');
+});
+
+floatingAiAsk.addEventListener('click', askFloatingAi);
+
+floatingAiQuestion.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') askFloatingAi();
+});
+
+function askFloatingAi() {
+  const question = floatingAiQuestion.value.trim();
+  if (!question) return;
+
+  const answer = generateFloatingAiAnswer(question);
+
+  floatingAiMessages.innerHTML += `
+    <div class="ai-user">${escapeHtml(question)}</div>
+    <div class="ai-bot">${escapeHtml(answer)}</div>
+  `;
+
+  floatingAiQuestion.value = '';
+  floatingAiMessages.scrollTop = floatingAiMessages.scrollHeight;
+}
+
+function generateFloatingAiAnswer(question) {
+  if (!finosAnalysis.financials) {
+    return 'Run FINOS first, then I can answer questions about your business health, financials, benchmarks, and improvement opportunities.';
+  }
+
+  const q = question.toLowerCase();
+  const f = finosAnalysis.financials;
+  const s = finosAnalysis.score;
+  const topInsight = finosAnalysis.insights[0];
+
+  if (q.includes('score') || q.includes('health')) {
+    return `Your Business Health score is ${s.value}/100 (${s.label}). The weakest driver is the area marked "Needs most attention" in the score breakdown.`;
+  }
+
+  if (q.includes('cash') || q.includes('liquidity')) {
+    return `Your cash position is ${money(f.cash)} and estimated runway is ${f.cashRunwayMonths.toFixed(1)} months. Improving receivables, payables, and working capital would strengthen liquidity.`;
+  }
+
+  if (q.includes('profit') || q.includes('margin')) {
+    return `Your gross margin is ${pct(f.grossMargin)} and net margin is ${pct(f.netMargin)}. The main profit levers are pricing, COGS control, payroll efficiency, and fixed-cost discipline.`;
+  }
+
+  if (q.includes('benchmark') || q.includes('compare')) {
+    return `FINOS estimates that you outperform ${finosAnalysis.benchmarks.benchmarkPercent}% of similar businesses based on the current benchmark model. This will become stronger once connected to the benchmark database.`;
+  }
+
+  if (q.includes('improve') || q.includes('fix') || q.includes('priority')) {
+    return `${topInsight.title}: ${topInsight.body} Estimated impact: ${money(topInsight.impact)}.`;
+  }
+
+  return `I would start with your score drivers, then check Financials, Benchmarks, and AI Insights. Your highest-impact current opportunity is: ${topInsight.title}.`;
+}
