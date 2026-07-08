@@ -444,6 +444,7 @@ function generateAnalytics(score) {
 
 function renderReport(analysis) {
   renderScore(analysis);
+  renderScoreDrivers(analysis);
   renderFinancialCards(analysis);
   renderBenchmarks(analysis);
   renderLeaders(analysis);
