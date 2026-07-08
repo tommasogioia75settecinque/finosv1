@@ -451,6 +451,27 @@ function renderReport(analysis) {
   renderAnalytics(analysis);
 }
 
+function renderScoreDrivers(analysis) {
+  const existing = document.getElementById('scoreDrivers');
+  if (!existing) return;
+
+  const drivers = analysis.score.drivers;
+
+  existing.innerHTML = [
+    ['Profitability', drivers.profitability, 'Margins and bottom-line strength'],
+    ['Liquidity', drivers.liquidity, 'Cash, runway, and working capital'],
+    ['Efficiency', drivers.efficiency, 'Cost discipline and operating leverage'],
+    ['Stability', drivers.stability, 'Debt pressure and resilience'],
+    ['Growth', drivers.growth, 'Revenue momentum placeholder']
+  ].map((driver) => `
+    <article class="metric-card">
+      <span>${driver[0]}</span>
+      <strong>${driver[1]}/100</strong>
+      <small>${driver[2]}</small>
+    </article>
+  `).join('');
+}
+
 function renderScore(analysis) {
   const scoreDegrees = Math.round((analysis.score.value / 100) * 360);
 
