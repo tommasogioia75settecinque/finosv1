@@ -111,4 +111,80 @@ button,input{font-family:inherit}
     grid-template-columns: 1fr;
   }
 }
+.health-summary{
 
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:18px;
+
+margin-top:28px;
+
+}
+
+.health-item{
+
+padding:18px;
+
+border-radius:16px;
+
+background:rgba(255,255,255,.05);
+
+text-align:center;
+
+}
+
+.health-item span{
+
+display:block;
+
+font-size:.8rem;
+
+opacity:.6;
+
+margin-bottom:8px;
+
+}
+
+.health-item strong{
+
+font-size:1.3rem;
+
+font-weight:700;
+
+}
+.health-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin: 28px 0 22px;
+  width: 100%;
+}
+
+.health-item {
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.06);
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.health-item span {
+  display: block;
+  font-size: 0.78rem;
+  opacity: 0.6;
+  margin-bottom: 8px;
+}
+
+.health-item strong {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+@media (max-width: 720px) {
+  .health-summary {
+    grid-template-columns: 1fr;
+  }
+}

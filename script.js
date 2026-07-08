@@ -471,6 +471,36 @@ function renderScoreDrivers(analysis) {
 
     financialSection.parentNode.insertBefore(section, financialSection);
     container = document.getElementById('scoreDrivers');
+    const score = analysis.score.value;
+
+let grade = "F";
+let status = "Critical";
+
+if(score >= 90){
+    grade = "A+";
+    status = "Elite";
+}
+else if(score >= 80){
+    grade = "A";
+    status = "Excellent";
+}
+else if(score >= 70){
+    grade = "B";
+    status = "Healthy";
+}
+else if(score >= 60){
+    grade = "C";
+    status = "Improving";
+}
+else if(score >= 50){
+    grade = "D";
+    status = "At Risk";
+}
+
+document.getElementById("businessGrade").textContent = grade;
+document.getElementById("businessStatus").textContent = status;
+document.getElementById("nextGoal").textContent =
+score >= 90 ? "Maintain" : "90";
   }
 
   const drivers = [
@@ -516,13 +546,49 @@ function renderScoreDrivers(analysis) {
 }
 
 function renderScore(analysis) {
-  const scoreDegrees = Math.round((analysis.score.value / 100) * 360);
+  const score = analysis.score.value;
+  const scoreDegrees = Math.round((score / 100) * 360);
+
+  let grade = 'F';
+  let status = 'Critical';
+
+  if (score >= 90) {
+    grade = 'A+';
+    status = 'Elite';
+  } else if (score >= 80) {
+    grade = 'A';
+    status = 'Excellent';
+  } else if (score >= 70) {
+    grade = 'B';
+    status = 'Healthy';
+  } else if (score >= 60) {
+    grade = 'C';
+    status = 'Improving';
+  } else if (score >= 50) {
+    grade = 'D';
+    status = 'At Risk';
+  }
 
   document.getElementById('scoreRing').style.background =
     `conic-gradient(#fff 0deg, #8e8e8e ${scoreDegrees}deg, rgba(255,255,255,.08) ${scoreDegrees}deg)`;
 
-  document.getElementById('scoreValue').textContent = analysis.score.value;
-  document.getElementById('scoreLabel').textContent = analysis.score.label;
+  document.getElementById('scoreValue').textContent = score;
+  document.getElementById('scoreLabel').textContent = `Business Health: ${status}`;
+  document.getElementById('businessStatus').textContent = status;
+  document.getElementById('businessGrade').textContent = grade;
+  document.getElementById('nextGoal').textContent = score >= 90 ? 'Maintain' : '90';
+  document.getElementById('scoreNarrative').textContent = narrative(analysis);
+  document.getElementById('benchmarkPercent').textContent = `${analysis.benchmarks.benchmarkPercent}%`;
+}
+
+  document.getElementById('scoreRing').style.background =
+    `conic-gradient(#fff 0deg, #8e8e8e ${scoreDegrees}deg, rgba(255,255,255,.08) ${scoreDegrees}deg)`;
+
+  document.getElementById('scoreValue').textContent = score;
+  document.getElementById('scoreLabel').textContent = `Business Health: ${status}`;
+  document.getElementById('businessStatus').textContent = status;
+  document.getElementById('businessGrade').textContent = grade;
+  document.getElementById('nextGoal').textContent = score >= 90 ? 'Maintain' : '90';
   document.getElementById('scoreNarrative').textContent = narrative(analysis);
   document.getElementById('benchmarkPercent').textContent = `${analysis.benchmarks.benchmarkPercent}%`;
 }
