@@ -581,18 +581,6 @@ function renderScore(analysis) {
   document.getElementById('benchmarkPercent').textContent = `${analysis.benchmarks.benchmarkPercent}%`;
 }
 
-  document.getElementById('scoreRing').style.background =
-    `conic-gradient(#fff 0deg, #8e8e8e ${scoreDegrees}deg, rgba(255,255,255,.08) ${scoreDegrees}deg)`;
-
-  document.getElementById('scoreValue').textContent = score;
-  document.getElementById('scoreLabel').textContent = `Business Health: ${status}`;
-  document.getElementById('businessStatus').textContent = status;
-  document.getElementById('businessGrade').textContent = grade;
-  document.getElementById('nextGoal').textContent = score >= 90 ? 'Maintain' : '90';
-  document.getElementById('scoreNarrative').textContent = narrative(analysis);
-  document.getElementById('benchmarkPercent').textContent = `${analysis.benchmarks.benchmarkPercent}%`;
-}
-
 function renderFinancialCards(analysis) {
   const f = analysis.financials;
 
