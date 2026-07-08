@@ -452,24 +452,66 @@ function renderReport(analysis) {
 }
 
 function renderScoreDrivers(analysis) {
-  const existing = document.getElementById('scoreDrivers');
-  if (!existing) return;
+  let container = document.getElementById('scoreDrivers');
 
-  const drivers = analysis.score.drivers;
+  if (!container) {
+    const financialSection = document.getElementById('financialCards')?.closest('.report-section');
 
-  existing.innerHTML = [
-    ['Profitability', drivers.profitability, 'Margins and bottom-line strength'],
-    ['Liquidity', drivers.liquidity, 'Cash, runway, and working capital'],
-    ['Efficiency', drivers.efficiency, 'Cost discipline and operating leverage'],
-    ['Stability', drivers.stability, 'Debt pressure and resilience'],
-    ['Growth', drivers.growth, 'Revenue momentum placeholder']
-  ].map((driver) => `
-    <article class="metric-card">
-      <span>${driver[0]}</span>
-      <strong>${driver[1]}/100</strong>
-      <small>${driver[2]}</small>
-    </article>
-  `).join('');
+    const section = document.createElement('section');
+    section.className = 'report-section';
+    section.innerHTML = `
+      <div class="section-heading">
+        <span>FINOS Score™</span>
+        <h2>Why this score?</h2>
+        <p>The FINOS Score is calculated from profitability, liquidity, efficiency, stability, and growth.</p>
+      </div>
+      <div id="scoreDrivers" class="score-drivers"></div>
+    `;
+
+    financialSection.parentNode.insertBefore(section, financialSection);
+    container = document.getElementById('scoreDrivers');
+  }
+
+  const drivers = [
+    ['Profitability', analysis.score.drivers.profitability, 'Margins and profit strength'],
+    ['Liquidity', analysis.score.drivers.liquidity, 'Cash, runway, and working capital'],
+    ['Efficiency', analysis.score.drivers.efficiency, 'Cost discipline and operating leverage'],
+    ['Stability', analysis.score.drivers.stability, 'Debt pressure and resilience'],
+    ['Growth', analysis.score.drivers.growth, 'Revenue momentum placeholder']
+  ];
+
+  const strongest = drivers.reduce((best, item) => item[1] > best[1] ? item : best, drivers[0]);
+  const weakest = drivers.reduce((worst, item) => item[1] < worst[1] ? item : worst, drivers[0]);
+
+  container.innerHTML = `
+    <div class="score-driver-summary glass-card">
+      <div>
+        <span>Strongest driver</span>
+        <strong>${strongest[0]}</strong>
+        <small>${strongest[2]}</small>
+      </div>
+      <div>
+        <span>Needs most attention</span>
+        <strong>${weakest[0]}</strong>
+        <small>${weakest[2]}</small>
+      </div>
+    </div>
+
+    <div class="score-driver-bars glass-card">
+      ${drivers.map((driver) => `
+        <div class="score-driver-row">
+          <div class="score-driver-top">
+            <span>${driver[0]}</span>
+            <strong>${driver[1]}/100</strong>
+          </div>
+          <div class="score-driver-track">
+            <div class="score-driver-fill" style="width:${driver[1]}%"></div>
+          </div>
+          <small>${driver[2]}</small>
+        </div>
+      `).join('')}
+    </div>
+  `;
 }
 
 function renderScore(analysis) {
